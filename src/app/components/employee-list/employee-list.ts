@@ -11,29 +11,46 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrl: './employee-list.css',
 })
 export class EmployeeList implements OnInit {
+
+errorMessage: string = '';
   employees: Employee[] = [];
   successMessage: string = '';
+  // Add these properties to store our dashboard metrics
+  totalEmployees: number = 0;
+  activeEmployees: number = 0;
+  inactiveEmployees: number = 0;
 
   constructor(
     private employeeService: EmployeeService,
     private spinner: NgxSpinnerService // <-- 2. Inject Service
   ) {}
 
+  
+
   ngOnInit(): void {
     this.fetchEmployees();
   }
 
   fetchEmployees(): void {
-    this.spinner.show(); // <-- 3. SHOW spinner before API call
+    this.spinner.show();
+    this.errorMessage = '';
 
     this.employeeService.getEmployee().subscribe({
-      next: (response) => {
-        this.employees = response.users;
-        this.spinner.hide(); // <-- 4. HIDE spinner on success
+      next: (cleanEmployeeArray) => {
+        this.employees = cleanEmployeeArray;
+        
+        // --- TASK 14 DASHBOARD CALCULATION ---
+        this.totalEmployees = this.employees.length;
+        
+        // Let's pretend an employee is "Inactive" if they don't have a phone number listed
+        this.inactiveEmployees = this.employees.filter(emp => !emp.phone || emp.phone.trim() === '').length;
+        this.activeEmployees = this.totalEmployees - this.inactiveEmployees;
+
+        this.spinner.hide();
       },
-      error: (err) => {
-        console.error('Failed to load employees', err);
-        this.spinner.hide(); // <-- 5. HIDE spinner on error! (Crucial)
+      error: (err: Error) => {
+        this.errorMessage = err.message;
+        this.spinner.hide();
       }
     });
   }

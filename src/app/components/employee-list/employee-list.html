@@ -1,3 +1,18 @@
+<div class="dashboard-cards">
+    <div class="card card-total">
+      <h3>Total Employees</h3>
+      <h2>{{ totalEmployees }}</h2>
+    </div>
+    <div class="card card-active">
+      <h3>Active</h3>
+      <h2>{{ activeEmployees }}</h2>
+    </div>
+    <div class="card card-inactive">
+      <h3>Inactive</h3>
+      <h2>{{ inactiveEmployees }}</h2>
+    </div>
+  </div>
+
 <div class="container">
   <h2>Employee Directory</h2>
 
@@ -6,12 +21,19 @@
   }
   
   <table class="employee-table">
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Full Name</th> <th>Department</th> <th>Email</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
     <tbody>
       @for (emp of employees; track emp.id) {
         <tr>
           <td>{{ emp.id }}</td>
-          <td>{{ emp.firstName }} {{ emp.lastName }}</td>
-          <td>{{ emp.email }}</td>
+          <td>{{ emp.fullName }}</td> <td>{{ emp.department }}</td> <td>{{ emp.email }}</td>>
           <td>{{ emp.phone }}</td>
           <td>
             <button [routerLink]="['/employee', emp.id]" class="btn-view">View</button>
@@ -24,4 +46,9 @@
         }
     </tbody>
   </table>
+  @if (errorMessage) {
+    <div class="alert alert-danger" style="text-align: center; font-weight: bold;">
+      ⚠️ {{ errorMessage }}
+    </div>
+  }
 </div>
