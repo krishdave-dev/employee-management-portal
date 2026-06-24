@@ -1,0 +1,52 @@
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.employee-table th, .employee-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.employee-table th {
+  background-color: #0056b3;
+  color: white;
+}
+
+.employee-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.employee-table tr:hover {
+  background-color: #ddd;
+}
+
+.text-center {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+.btn-edit { background-color: #ffc107; color: black; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+/* Add this to your existing CSS */
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-delete:hover {
+  background-color: #c82333;
+}
+.alert { padding: 10px; margin-bottom: 15px; border-radius: 4px; }
+.alert-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }

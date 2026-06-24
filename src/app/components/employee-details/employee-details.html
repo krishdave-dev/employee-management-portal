@@ -1,0 +1,31 @@
+<div class="container">
+  @if (employee) {
+    <div class="detail-card">
+      <h2>Employee Details</h2>
+      
+      <div class="info-group">
+        <label>Name:</label>
+        <span>{{ employee.firstName }} {{ employee.lastName }}</span>
+      </div>
+      
+      <div class="info-group">
+        <label>Email:</label>
+        <span>{{ employee.email }}</span>
+      </div>
+      
+      <div class="info-group">
+        <label>Phone:</label>
+        <span>{{ employee.phone }}</span>
+      </div>
+      
+      <div class="info-group">
+        <label>Department:</label>
+        <span>{{ employee.company?.department || 'Not Assigned' }}</span>
+      </div>
+
+      <button routerLink="/employees" class="btn-back">Back to List</button>
+    </div>
+  } @else {
+    <div class="loading-state">Loading employee details...</div>
+  }
+</div>

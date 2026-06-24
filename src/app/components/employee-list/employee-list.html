@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Employee Directory</h2>
+
+  @if (successMessage) {
+    <div class="alert alert-success">{{ successMessage }}</div>
+  }
+  
+  <table class="employee-table">
+    <tbody>
+      @for (emp of employees; track emp.id) {
+        <tr>
+          <td>{{ emp.id }}</td>
+          <td>{{ emp.firstName }} {{ emp.lastName }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.phone }}</td>
+          <td>
+            <button [routerLink]="['/employee', emp.id]" class="btn-view">View</button>
+            <button [routerLink]="['/edit-employee', emp.id]" class="btn-edit" style="margin-left: 5px;">Edit</button>
+            
+            <button (click)="onDelete(emp.id, emp.firstName)" class="btn-delete" style="margin-left: 5px;">Delete</button>
+          </td>
+        </tr>
+      } @empty {
+        }
+    </tbody>
+  </table>
+</div>

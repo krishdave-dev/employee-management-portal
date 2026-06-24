@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
+import { NgxSpinnerModule } from 'ngx-spinner'; // <-- Import Module
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NgxSpinnerModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Required for ngx-spinner custom tags
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

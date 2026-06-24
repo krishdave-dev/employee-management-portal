@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="form-card">
+    <h2>Edit Employee</h2>
+
+    @if (successMessage) { <div class="alert alert-success">{{ successMessage }}</div> }
+    @if (errorMessage) { <div class="alert alert-danger">{{ errorMessage }}</div> }
+
+    @if (isLoading) {
+      <div class="loading-text">Fetching employee data...</div>
+    } @else {
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input id="firstName" type="text" formControlName="firstName">
+          @if (employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched) {
+            <small class="error-text">First name is required.</small>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" type="text" formControlName="lastName">
+          @if (employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched) {
+            <small class="error-text">Last name is required.</small>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email">
+          @if (employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched) {
+            <small class="error-text">A valid email is required.</small>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input id="phone" type="text" formControlName="phone">
+          @if (employeeForm.get('phone')?.invalid && employeeForm.get('phone')?.touched) {
+            <small class="error-text">Phone is required.</small>
+          }
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-submit" [disabled]="employeeForm.invalid">Update</button>
+          <button type="button" class="btn-cancel" routerLink="/employees">Back to List</button>
+        </div>
+      </form>
+    }
+  </div>
+</div>
